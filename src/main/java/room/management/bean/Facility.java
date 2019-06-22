@@ -1,4 +1,4 @@
-package room.management.room.bean;
+package room.management.bean;
 
 import javax.persistence.*;
 
@@ -15,7 +15,6 @@ public class Facility {
 	private String facilityName;
 
 	public Facility() {
-		
 	}
 
 	public Facility(int id, String facilityName) {
@@ -23,5 +22,20 @@ public class Facility {
 		this.facilityName = facilityName;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getFacilityName() {
+		return facilityName;
+	}
+
+	public void setFacilityName(String facilityName) {
+		this.facilityName = facilityName;
+	}
 
 }

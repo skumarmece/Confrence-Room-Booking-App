@@ -1,18 +1,17 @@
 package room.management.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import room.management.room.bean.Room;
+import room.management.bean.Room;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @RestController
 public class RoomController {
@@ -20,13 +19,7 @@ public class RoomController {
     @Autowired
     RoomController itemService;
 
-    public static List<Room> rooms;
-    static{
-        rooms = new ArrayList<>(Arrays.asList(new Room(1,"Spring Boot in Action","Books"),
-                new Room(2,"Java 8 in Action","Books"),
-                new Room(3,"Data Structures","Books"),
-                new Room(4,"Spring Boot Security","Books")));
-    }
+    private List<Room> rooms;
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @RequestMapping("/getAllItems")

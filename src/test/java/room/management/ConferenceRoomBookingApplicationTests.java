@@ -11,6 +11,7 @@ public class ConferenceRoomBookingApplicationTests {
 
 	@Test
 	public void contextLoads() {
+
 	}
 
 }

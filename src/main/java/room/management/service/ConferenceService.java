@@ -1,11 +1,12 @@
-package room.management.room.service;
+package room.management.service;
 
 import java.util.List;
 
-import room.management.room.bean.Conference;
+import room.management.bean.Conference;
 
 public interface ConferenceService {
-	public void createConference(Conference conference);
+	
+	public Conference createConference(Conference conference);
 
 	public List<Conference> getConference();
 

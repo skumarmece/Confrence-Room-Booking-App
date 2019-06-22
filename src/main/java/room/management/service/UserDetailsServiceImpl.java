@@ -1,8 +1,8 @@
-package room.management.room.service;
+package room.management.service;
 
-import room.management.room.bean.User;
-import room.management.room.bean.UserDetailsImpl;
-import room.management.room.repository.UsersRepository;
+import room.management.bean.User;
+import room.management.bean.UserDetailsImpl;
+import room.management.repository.UsersRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

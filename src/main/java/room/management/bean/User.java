@@ -1,4 +1,4 @@
-package room.management.room.bean;
+package room.management.bean;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -19,7 +19,7 @@ public class User {
 	private String lastName;
 
 	@Column(name = "email")
-	private String eMail;
+	private String email;
 
 	@Column(name = "password")
 	private String password;
@@ -28,8 +28,7 @@ public class User {
 	private int isActive;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), 
-	inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
 
 	public User() {
@@ -64,16 +63,16 @@ public class User {
 		return lastName;
 	}
 
-	public String geteMail() {
-		return eMail;
-	}
-
-	public void seteMail(String eMail) {
-		this.eMail = eMail;
-	}
-
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -98,12 +97,6 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
-	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", eMail=" + eMail
-				+ ", password=" + password + ", isActive=" + isActive + ", roles=" + roles + "]";
 	}
 
 }

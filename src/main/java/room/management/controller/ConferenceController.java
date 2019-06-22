@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import room.management.room.bean.Conference;
-import room.management.room.service.ConferenceService;
+import room.management.bean.Conference;
+import room.management.service.ConferenceService;
 
 @RestController
 @RequestMapping(value = { "/conference" })

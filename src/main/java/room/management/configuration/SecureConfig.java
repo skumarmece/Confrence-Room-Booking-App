@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import room.management.room.repository.UsersRepository;
+import room.management.repository.UsersRepository;
 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration

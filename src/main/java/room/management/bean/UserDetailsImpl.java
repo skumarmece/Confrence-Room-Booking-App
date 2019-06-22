@@ -1,4 +1,4 @@
-package room.management.room.bean;
+package room.management.bean;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

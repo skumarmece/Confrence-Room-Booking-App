@@ -1,4 +1,4 @@
-package room.management.room.service;
+package room.management.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import room.management.room.bean.Conference;
-import room.management.room.repository.ConferenceRepository;
+import room.management.bean.Conference;
+import room.management.repository.ConferenceRepository;
 
 @Service
 @Transactional
@@ -15,9 +15,9 @@ public class ConferenceServiceImp implements ConferenceService {
 	@Autowired
 	ConferenceRepository conferenceRepository;
 
-	public void createConference(Conference conference) {
+	public Conference createConference(Conference conference) {
 		// TODO Auto-generated method stub
-		conferenceRepository.save(conference);
+		return conferenceRepository.save(conference);
 	}
 
 	public List<Conference> getConference() {
@@ -43,7 +43,6 @@ public class ConferenceServiceImp implements ConferenceService {
 	public Conference updatePartially(Conference conference, long id) {
 		// TODO Auto-generated method stub
 		Conference usr = findById(id);
-		usr.setCountry(conference.getCountry());
 		return conferenceRepository.save(usr);
 	}
 
