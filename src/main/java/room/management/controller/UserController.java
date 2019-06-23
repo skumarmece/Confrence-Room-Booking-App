@@ -11,24 +11,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import room.management.bean.Room;
+import room.management.bean.User;
+import room.management.repository.UsersRepository;
 
 @RestController
-@RequestMapping(value = { "/v1" })
-public class RoomController {
+@RequestMapping(value = { "/v1/users" })
+public class UserController {
 
 	@Autowired
-	RoomController itemService;
+	UserController itemService;
+
+	@Autowired
+	private UsersRepository usersRepository;
 
 	private List<Room> rooms;
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	@RequestMapping("/rooms")
+	@RequestMapping("/")
 	@ResponseBody
-	public ResponseEntity<List<Room>> getAllItems() {
-		// Reading all items (ADMIN only can access this)
-		List<Room> items = this.rooms;
-		System.out.println("Reading items: " + items);
-		return new ResponseEntity<List<Room>>(items, HttpStatus.OK);
+	public ResponseEntity<List<User>> getAllItems() {
+		return new ResponseEntity<List<User>>(usersRepository.findAll(), HttpStatus.OK);
 	}
 
 	@RequestMapping("/hello")
