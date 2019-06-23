@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import room.management.bean.Room;
 import room.management.bean.User;
 import room.management.repository.UsersRepository;
 
@@ -24,10 +23,8 @@ public class UserController {
 	@Autowired
 	private UsersRepository usersRepository;
 
-	private List<Room> rooms;
-
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	@RequestMapping("/")
+	@RequestMapping("")
 	@ResponseBody
 	public ResponseEntity<List<User>> getAllItems() {
 		return new ResponseEntity<List<User>>(usersRepository.findAll(), HttpStatus.OK);

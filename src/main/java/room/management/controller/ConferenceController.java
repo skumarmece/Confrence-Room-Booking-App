@@ -2,6 +2,8 @@ package room.management.controller;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -53,9 +55,8 @@ public class ConferenceController {
 
 	}
 
-	@PutMapping(value = "/update", headers = "Accept=application/json")
-	public ResponseEntity<String> updateConference(@RequestBody Conference currentConference) {
-		System.out.println("sd");
+	@PutMapping(value = "/{id}", headers = "Accept=application/json")
+	public ResponseEntity<String> updateConference(@RequestBody Conference currentConference,@PathParam(value = "id") long id) {
 		Conference conference = conferenceService.findById(currentConference.getId());
 		if (conference == null) {
 			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);

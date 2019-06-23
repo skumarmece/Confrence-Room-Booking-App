@@ -13,6 +13,7 @@ public class Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "category_id")
 	private long id;
 
 	@Column(name = "name")
@@ -23,6 +24,15 @@ public class Category {
 
 	@Column(name = "capacity")
 	private int capacity;
+
+	public Category() {
+	}
+
+	public Category(int capacity, String name, String description) {
+		this.capacity = capacity;
+		this.name = name;
+		this.description = description;
+	}
 
 	public long getId() {
 		return id;
@@ -55,7 +65,5 @@ public class Category {
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
 	}
-
-
 
 }

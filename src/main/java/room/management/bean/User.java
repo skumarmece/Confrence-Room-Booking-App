@@ -10,7 +10,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "user_id")
-	private int id;
+	private long id;
 
 	@Column(name = "firstname")
 	private String firstName;
@@ -43,11 +43,11 @@ public class User {
 		this.roles = user.getRoles();
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

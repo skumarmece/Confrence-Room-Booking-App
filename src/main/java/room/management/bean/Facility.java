@@ -9,8 +9,8 @@ public class Facility {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "facility_id")
-	private int id;
-
+	private long id;
+	
 	@Column(name = "facility_name")
 	private String facilityName;
 
@@ -22,11 +22,11 @@ public class Facility {
 		this.facilityName = facilityName;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

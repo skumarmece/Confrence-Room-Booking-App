@@ -3,7 +3,6 @@ package room.management.bean;
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,19 +22,20 @@ public class Room implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "room_id")
-	private Integer id;
+	private long id;
 
 	@Column(name = "name")
 	private String name;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinTable(name = "room_category", joinColumns = @JoinColumn(name = "category_id"), inverseJoinColumns = @JoinColumn(name = "room_id"))
 	private Category category;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "room_facility", joinColumns = @JoinColumn(name = "facility_id"), inverseJoinColumns = @JoinColumn(name = "room_id"))
 	private Set<Facility> facilities;
 
-	public Room(Integer id, String name, Category category) {
+	public Room(long id, String name, Category category) {
 		this.id = id;
 		this.name = name;
 		this.category = category;
@@ -44,11 +44,11 @@ public class Room implements Serializable {
 	public Room() {
 	}
 
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

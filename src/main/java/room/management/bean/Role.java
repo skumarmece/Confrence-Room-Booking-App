@@ -9,7 +9,7 @@ public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "role_id")
-	private int id;
+	private long id;
 
 	@Column(name = "role_name")
 	private String roleName;
@@ -17,16 +17,16 @@ public class Role {
 	public Role() {
 	}
 
-	public Role(int id, String roleName) {
+	public Role(long id, String roleName) {
 		this.id = id;
 		this.roleName = roleName;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
