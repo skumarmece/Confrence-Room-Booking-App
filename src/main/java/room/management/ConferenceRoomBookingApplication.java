@@ -79,7 +79,7 @@ public class ConferenceRoomBookingApplication {
 				Facility facility6 = new Facility();
 				facility6.setFacilityName("HDMI connectivity, ");
 
-				List facilities = new ArrayList<Facility>();
+				List<Facility> facilities = new ArrayList<Facility>();
 				Collections.addAll(facilities, facility, facility1, facility2, facility3, facility4, facility5,
 						facility6);
 				facilityRepository.saveAll(facilities);
@@ -95,7 +95,7 @@ public class ConferenceRoomBookingApplication {
 				Role role = new Role();
 //				role.setId(1);
 				role.setRoleName("ADMIN");
-				Set roles = new HashSet<Role>();
+				Set<Role> roles = new HashSet<Role>();
 				roles.add(role);
 				defaultUser.setRoles(roles);
 				usersRepository.save(defaultUser);
@@ -107,21 +107,13 @@ public class ConferenceRoomBookingApplication {
 				Room room1 = new Room();
 				room1.setName("WildCat");
 				room1.setCategory(categoryRepository.findById(1L).get());
-				Set facilities = new HashSet<Facility>();
+				Set<Facility> facilities = new HashSet<Facility>();
 				facilities.add(facilityRepository.findById(10l).get());
 				facilities.add(facilityRepository.findById(11l).get());
 				room1.setFacilities(facilities);
-				roomRepository.save(new Room());
+				roomRepository.save(room1);
 			}
 		};
 	}
-
-//	private static Room createRoomInstance() {
-//
-//	}
-//
-//	private static Facility getRoomFacility() {
-//
-//	}
 
 }

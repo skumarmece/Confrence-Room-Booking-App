@@ -38,4 +38,9 @@ public class Facility {
 		this.facilityName = facilityName;
 	}
 
+	@Override
+	public String toString() {
+		return "Facility [id=" + id + ", facilityName=" + facilityName + "]";
+	}
+
 }

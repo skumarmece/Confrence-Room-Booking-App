@@ -31,18 +31,18 @@ public class SecureConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+//    	
+//    	http.httpBasic()
+//        .and()
+//        .authorizeRequests()
+//        .anyRequest().authenticated();
     	
-    	http.httpBasic()
-        .and()
-        .authorizeRequests()
-        .anyRequest().authenticated();
-    	
-//        http.csrf().disable();
-//        http.authorizeRequests()
-//                .antMatchers("/").permitAll()
-//                .antMatchers(HttpMethod.POST, "/login").permitAll()
-//                .anyRequest().authenticated()
-//                .and().formLogin().permitAll();
+        http.csrf().disable();
+        http.authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers(HttpMethod.POST, "/login").permitAll()
+                .anyRequest().authenticated()
+                .and().formLogin().permitAll();
     }
 
     private PasswordEncoder getPasswordEncoder() {

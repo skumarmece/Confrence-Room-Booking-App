@@ -11,8 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,16 +27,16 @@ public class Room implements Serializable {
 	@Column(name = "name")
 	private String name;
 
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinTable(name = "room_category", joinColumns = @JoinColumn(name = "category_id"), inverseJoinColumns = @JoinColumn(name = "room_id"))
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Category.class)
+	@JoinColumn(name = "category_id", insertable = false, updatable = false)
 	private Category category;
 
 	@OneToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "room_facility", joinColumns = @JoinColumn(name = "facility_id"), inverseJoinColumns = @JoinColumn(name = "room_id"))
+	@JoinTable(name = "room_facility", joinColumns = @JoinColumn(name = "facility_id"), 
+	inverseJoinColumns = @JoinColumn(name = "room_id"))
 	private Set<Facility> facilities;
 
-	public Room(long id, String name, Category category) {
-		this.id = id;
+	public Room(String name, Category category) {
 		this.name = name;
 		this.category = category;
 	}
@@ -74,6 +74,11 @@ public class Room implements Serializable {
 
 	public void setFacilities(Set<Facility> facilities) {
 		this.facilities = facilities;
+	}
+
+	@Override
+	public String toString() {
+		return "Room [id=" + id + ", name=" + name + ", category=" + category + ", facilities=" + facilities + "]";
 	}
 
 }

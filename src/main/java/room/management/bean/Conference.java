@@ -23,7 +23,7 @@ public class Conference {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)
 	private User user;
 
 	@Column(name = "description")
@@ -38,7 +38,7 @@ public class Conference {
 	@Column(name = "end_time")
 	private Date endTime;
 
-	@Column(name = "room")
+	@OneToOne(fetch = FetchType.EAGER)
 	private Room room;
 
 	public long getId() {
@@ -95,6 +95,12 @@ public class Conference {
 
 	public void setRoom(Room room) {
 		this.room = room;
+	}
+
+	@Override
+	public String toString() {
+		return "Conference [id=" + id + ", user=" + user + ", description=" + description + ", name=" + name
+				+ ", startTime=" + startTime + ", endTime=" + endTime + ", room=" + room + "]";
 	}
 
 }
