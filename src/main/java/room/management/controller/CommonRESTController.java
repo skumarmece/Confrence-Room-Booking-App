@@ -24,7 +24,7 @@ public class CommonRESTController {
 
 	@Autowired
 	CategoryRepository categoryRepository;
-	
+
 	@Autowired
 	FacilityRepository facilityRepository;
 
@@ -34,19 +34,12 @@ public class CommonRESTController {
 	public ResponseEntity<List<Category>> getAllCategories() {
 		return new ResponseEntity<List<Category>>(categoryRepository.findAll(), HttpStatus.OK);
 	}
-	
+
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping("/facilities")
 	@ResponseBody
 	public ResponseEntity<List<Facility>> getAllIFacilities() {
 		return new ResponseEntity<List<Facility>>(facilityRepository.findAll(), HttpStatus.OK);
-	}
-	
-	
-
-	@RequestMapping("/hello")
-	public String sayHello() {
-		return "Hello User!";
 	}
 
 }

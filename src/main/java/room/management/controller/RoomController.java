@@ -34,9 +34,6 @@ public class RoomController {
 	Logger logger = LoggerFactory.getLogger(RoomController.class);
 
 	@Autowired
-	RoomController itemService;
-
-	@Autowired
 	RoomRepository roomRepository;
 
 	@Autowired
@@ -58,7 +55,7 @@ public class RoomController {
 		logger.error(room.toString());
 		room.setCategory(categoryRepository.findById(room.getCategory().getId()).get());
 		room = roomRepository.saveAndFlush(room);
-		Set<Facility> facilities =  new HashSet();
+		Set<Facility> facilities = new HashSet();
 //		for (Facility facility : room.getFacilities()) {
 //			facilities.add(facilityRepository.findById(facility.getId()).get());
 //		}
