@@ -56,15 +56,10 @@ public class ConferenceServiceImp implements ConferenceService {
 	}
 
 	@Override
-	public List<Conference> getConferenceByStartAndEndDate(Date startDate, Date endDate) throws RestExceptionHandler {
-		return (List<Conference>) conferenceRepository.findByStartAndEndDate(startDate, endDate);
+	public List<Conference> getConferenceByRoomId(long roomId, long conferenceId) throws RestExceptionHandler {
+		return (List<Conference>) conferenceRepository.findConferenceByRoomId(roomId, conferenceId);
 	}
-
-	@Override
-	public List<Conference> getConferenceByStartAndEndDateAndRoomId(long roomId, long conferenceId, Date startDate, Date endDate) throws RestExceptionHandler {
-		return (List<Conference>) conferenceRepository.findByStartAndEndDateAndRoomId(roomId, conferenceId, startDate, endDate);
-	}
-
+	
 	public List<Conference> getConference() {
 		return (List<Conference>) conferenceRepository.findAll();
 	}

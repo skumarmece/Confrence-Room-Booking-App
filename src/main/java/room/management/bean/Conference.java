@@ -1,7 +1,7 @@
 package room.management.bean;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,8 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @NamedQueries({
 	@NamedQuery(name = "Conference.findByRoomId", query = "SELECT c FROM Conference c WHERE c.room.id = :roomId"),
-	@NamedQuery(name = "Conference.findByStartAndEndDate", query = "SELECT c FROM Conference c WHERE (c.startDate <= :startDate and c.endDate >= :startDate) or (c.startDate <= :endDate and c.endDate >= :endDate)"),
-	@NamedQuery(name = "Conference.findByStartAndEndDateAndRoomId", query = "SELECT c FROM Conference c WHERE c.room.id = :roomId and ((c.startDate <= :startDate and c.endDate >= :startDate) or (c.startDate <= :endDate and c.endDate >= :endDate)) and c.id != :conferenceId")
+	@NamedQuery(name = "Conference.findConferenceByRoomId", query = "SELECT c FROM Conference c WHERE c.room.id = :roomId and c.id != :conferenceId")
 })
 @Table(name = "conference")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })

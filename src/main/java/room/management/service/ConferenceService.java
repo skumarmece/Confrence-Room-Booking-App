@@ -22,7 +22,5 @@ public interface ConferenceService {
 	
 	public List<Conference> getConferenceByRoomId(long roomId) throws RestExceptionHandler;
 	
-	public List<Conference> getConferenceByStartAndEndDate(Date startDate, Date endDate) throws RestExceptionHandler;
-	
-	public List<Conference> getConferenceByStartAndEndDateAndRoomId(long roomId, long conferenceId, Date startDate, Date endDate) throws RestExceptionHandler;
+	public List<Conference> getConferenceByRoomId(long roomId, long conferenceId) throws RestExceptionHandler;
 }

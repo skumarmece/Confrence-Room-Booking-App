@@ -54,10 +54,8 @@ public class ServiceUtils {
 		boolean bookingConflict = false;
 		
 		try {
-			Date startDate = conference.getStartDate();
-			Date endDate = conference.getEndDate();
 			//todo: fetch the conference records based on the time start and endtime
-			List<Conference> bookedConferenceList = conferenceService.getConferenceByStartAndEndDateAndRoomId(roomId, conferenceId, startDate, endDate);
+			List<Conference> bookedConferenceList = conferenceService.getConferenceByRoomId(roomId, conferenceId);
 			
 			long startingTime = conference.getStartTime().toInstant().toEpochMilli();
 			long endingTime = conference.getEndTime().toInstant().toEpochMilli();
@@ -66,7 +64,7 @@ public class ServiceUtils {
 				for(Conference bookedConference : bookedConferenceList) {
 					long startTime = bookedConference.getStartTime().toInstant().toEpochMilli();
 					long endTime = bookedConference.getEndTime().toInstant().toEpochMilli();
-					if((startTime < startingTime && endTime > startingTime) || (startTime < endingTime && endTime > endingTime) ) {
+					if((startTime < startingTime && endTime > startingTime) || (startTime < endingTime) ) {
 						bookingConflict = true;
 						break;
 					} else if(startTime == startingTime && endTime == endingTime) {

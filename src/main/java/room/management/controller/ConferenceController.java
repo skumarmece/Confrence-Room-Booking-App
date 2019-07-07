@@ -105,7 +105,5 @@ public class ConferenceController {
 		} catch (RestExceptionHandler e) {
 			return new ResponseEntity(e.getStatus());
 		}
-		conference = conferenceService.updatePartially(currentConference, id);
-		return new ResponseEntity<Conference>(conference, HttpStatus.OK);
 	}
 }
