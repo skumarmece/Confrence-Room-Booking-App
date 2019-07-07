@@ -16,7 +16,7 @@ import room.management.repository.CategoryRepository;
 import room.management.repository.FacilityRepository;
 
 @RestController
-@RequestMapping(value = { "/v1" })
+@RequestMapping(value = { "/api/v1" })
 public class CommonRESTController {
 
 	@Autowired

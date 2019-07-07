@@ -28,7 +28,7 @@ import room.management.repository.FacilityRepository;
 import room.management.repository.RoomRepository;
 
 @RestController
-@RequestMapping(value = { "/v1/rooms" })
+@RequestMapping(value = { "/api/v1/rooms" })
 public class RoomController {
 
 	Logger logger = LoggerFactory.getLogger(RoomController.class);
@@ -59,10 +59,10 @@ public class RoomController {
 		room.setCategory(categoryRepository.findById(room.getCategory().getId()).get());
 		room = roomRepository.saveAndFlush(room);
 		Set<Facility> facilities =  new HashSet();
-		for (Facility facility : room.getFacilities()) {
-			facilities.add(facilityRepository.findById(facility.getId()).get());
-		}
-		room.setFacilities(facilities);
+//		for (Facility facility : room.getFacilities()) {
+//			facilities.add(facilityRepository.findById(facility.getId()).get());
+//		}
+//		room.setFacilities(facilities);
 		logger.error(room.toString());
 		return new ResponseEntity<Room>(room, HttpStatus.OK);
 	}

@@ -1,16 +1,18 @@
 package room.management.bean;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "user_id")
-	private long id;
+	private Long id;
 
 	@Column(name = "firstname")
 	private String firstName;
@@ -43,11 +45,11 @@ public class User {
 		this.roles = user.getRoles();
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

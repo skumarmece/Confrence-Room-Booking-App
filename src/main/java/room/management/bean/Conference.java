@@ -1,8 +1,8 @@
 package room.management.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "conference")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class Conference {
+public class Conference implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,7 +33,7 @@ public class Conference {
 	private String name;
 
 	@Column(name = "start_time")
-	private java.sql.Date startTime;
+	private Date startTime;
 
 	@Column(name = "end_time")
 	private Date endTime;
@@ -73,11 +73,19 @@ public class Conference {
 		this.name = name;
 	}
 
-	public java.sql.Date getStartTime() {
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+
+	public Date getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(java.sql.Date startTime) {
+	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
 
@@ -89,18 +97,11 @@ public class Conference {
 		this.endTime = endTime;
 	}
 
-	public Room getRoom() {
-		return room;
-	}
-
-	public void setRoom(Room room) {
-		this.room = room;
-	}
-
 	@Override
 	public String toString() {
 		return "Conference [id=" + id + ", user=" + user + ", description=" + description + ", name=" + name
 				+ ", startTime=" + startTime + ", endTime=" + endTime + ", room=" + room + "]";
 	}
+
 
 }

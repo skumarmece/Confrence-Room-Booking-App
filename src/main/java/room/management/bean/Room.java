@@ -1,7 +1,6 @@
 package room.management.bean;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,9 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,14 +24,15 @@ public class Room implements Serializable {
 	@Column(name = "name")
 	private String name;
 
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Category.class)
-	@JoinColumn(name = "category_id", insertable = false, updatable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "category_id")
 	private Category category;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "room_facility", joinColumns = @JoinColumn(name = "facility_id"), 
-	inverseJoinColumns = @JoinColumn(name = "room_id"))
-	private Set<Facility> facilities;
+	
+//	@OneToMany(fetch = FetchType.EAGER)
+//	@JoinTable(name = "room_facility", joinColumns = @JoinColumn(name = "facility_id"), 
+//	inverseJoinColumns = @JoinColumn(name = "room_id"))
+//	private Set<Facility> facilities;
 
 	public Room(String name, Category category) {
 		this.name = name;
@@ -68,17 +66,24 @@ public class Room implements Serializable {
 		this.category = category;
 	}
 
-	public Set<Facility> getFacilities() {
-		return facilities;
-	}
-
-	public void setFacilities(Set<Facility> facilities) {
-		this.facilities = facilities;
-	}
-
 	@Override
 	public String toString() {
-		return "Room [id=" + id + ", name=" + name + ", category=" + category + ", facilities=" + facilities + "]";
+		return "Room [id=" + id + ", name=" + name + ", category=" + category + "]";
 	}
 
+//	public Set<Facility> getFacilities() {
+//		return facilities;
+//	}
+//
+//	public void setFacilities(Set<Facility> facilities) {
+//		this.facilities = facilities;
+//	}
+
+//	@Override
+//	public String toString() {
+//		return "Room [id=" + id + ", name=" + name + ", category=" + category + ", facilities=" + facilities + "]";
+//	}
+
+	
+	
 }

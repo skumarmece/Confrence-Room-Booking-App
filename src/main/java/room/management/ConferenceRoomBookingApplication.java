@@ -2,6 +2,7 @@ package room.management;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,11 +13,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import room.management.bean.Category;
+import room.management.bean.Conference;
 import room.management.bean.Facility;
 import room.management.bean.Role;
 import room.management.bean.Room;
 import room.management.bean.User;
 import room.management.repository.CategoryRepository;
+import room.management.repository.ConferenceRepository;
 import room.management.repository.FacilityRepository;
 import room.management.repository.RoomRepository;
 import room.management.repository.UsersRepository;
@@ -30,7 +33,8 @@ public class ConferenceRoomBookingApplication {
 
 	@Bean
 	public CommandLineRunner demoData(RoomRepository roomRepository, UsersRepository usersRepository,
-			CategoryRepository categoryRepository, FacilityRepository facilityRepository) {
+			CategoryRepository categoryRepository, FacilityRepository facilityRepository,
+			ConferenceRepository conferenceRepository) {
 		// useful link to name the Rooms
 		// https://www.britannica.com/topic-browse/Animals/Mammals/Feline-Family/1
 		return args -> {
@@ -43,7 +47,7 @@ public class ConferenceRoomBookingApplication {
 						new Category(4, "Small Sԛuаrе Style", "This style iѕ ideal for a grоuр оf under 4 people."),
 						new Category(20, "Banquet Style",
 								"Depending on the room’s purpose, these tables will either "
-								+ "have standing places or up to 8 chairs placed around them."),
+										+ "have standing places or up to 8 chairs placed around them."),
 						new Category(20, "Cabaret Style", "This style iѕ ideal for a grоuр оf under 20 people."),
 						new Category(20, "Classroom Style",
 								"The audience is still sitting in rows and facing one main central speaker, but they now have tables in front of them to allow for note-taking and other tasks."),
@@ -110,8 +114,20 @@ public class ConferenceRoomBookingApplication {
 				Set<Facility> facilities = new HashSet<Facility>();
 				facilities.add(facilityRepository.findById(10l).get());
 				facilities.add(facilityRepository.findById(11l).get());
-				room1.setFacilities(facilities);
+				// room1.setFacilities(facilities);
 				roomRepository.save(room1);
+			}
+			
+			if(conferenceRepository.count() < 1) {
+				Conference conference = new Conference();
+				conference.setUser(usersRepository.findByFirstName("admin").get());
+				conference.setName("Scrum");
+				conference.setDescription("Daily standup meeting");
+				Long milliSec = System.currentTimeMillis();
+				conference.setStartTime(new Date(milliSec));
+				conference.setEndTime(new Date(milliSec+30000));
+				conference.setRoom(roomRepository.findById(19l).get());
+				conferenceRepository.save(conference);
 			}
 		};
 	}

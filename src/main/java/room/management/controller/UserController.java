@@ -14,7 +14,7 @@ import room.management.bean.User;
 import room.management.repository.UsersRepository;
 
 @RestController
-@RequestMapping(value = { "/v1/users" })
+@RequestMapping(value = { "/api/v1/users" })
 public class UserController {
 
 	@Autowired

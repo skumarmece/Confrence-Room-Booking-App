@@ -24,7 +24,7 @@ import room.management.bean.Conference;
 import room.management.service.ConferenceService;
 
 @RestController
-@RequestMapping(value = { "/conference" })
+@RequestMapping(value = { "/api/v1/conference" })
 public class ConferenceController {
 	@Autowired
 	ConferenceService conferenceService;
@@ -39,7 +39,7 @@ public class ConferenceController {
 		return new ResponseEntity<Conference>(conference, HttpStatus.OK);
 	}
 
-	@PostMapping(value = "/create", headers = "Accept=application/json")
+	@PostMapping(value = "", headers = "Accept=application/json")
 	public ResponseEntity<Void> createConference(@RequestBody Conference conference, UriComponentsBuilder ucBuilder) {
 		System.out.println("Creating Conference " + conference.getName());
 		conferenceService.createConference(conference);
@@ -48,7 +48,7 @@ public class ConferenceController {
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
-	@GetMapping(value = "/get", headers = "Accept=application/json")
+	@GetMapping(value = "", headers = "Accept=application/json")
 	public List<Conference> getAllConference() {
 		List<Conference> tasks = conferenceService.getConference();
 		return tasks;
