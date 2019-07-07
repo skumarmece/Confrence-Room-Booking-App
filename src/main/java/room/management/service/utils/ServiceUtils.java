@@ -56,15 +56,14 @@ public class ServiceUtils {
 		try {
 			//todo: fetch the conference records based on the time start and endtime
 			List<Conference> bookedConferenceList = conferenceService.getConferenceByRoomId(roomId, conferenceId);
-			
 			long startingTime = conference.getStartTime().toInstant().toEpochMilli();
 			long endingTime = conference.getEndTime().toInstant().toEpochMilli();
-			
+
 			if(bookedConferenceList != null && !bookedConferenceList.isEmpty()) {
 				for(Conference bookedConference : bookedConferenceList) {
 					long startTime = bookedConference.getStartTime().toInstant().toEpochMilli();
 					long endTime = bookedConference.getEndTime().toInstant().toEpochMilli();
-					if((startTime < startingTime && endTime > startingTime) || (startTime < endingTime) ) {
+					if((startTime < startingTime && endTime > startingTime) || (startTime > startingTime && startTime < endingTime) ) {
 						bookingConflict = true;
 						break;
 					} else if(startTime == startingTime && endTime == endingTime) {
