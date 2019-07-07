@@ -1,5 +1,6 @@
 package room.management.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.websocket.server.PathParam;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import room.management.bean.Conference;
-import room.management.exception.RestExceptionHandler;
+import room.management.exception.RoomBookingException;
 import room.management.service.ConferenceService;
 
 @RestController
@@ -36,6 +37,17 @@ public class ConferenceController {
 		return conferences;
 	}
 
+	@GetMapping(value = "/room/{id}", headers = "Accept=application/json")
+	public List<Conference> getAllConferenceByRoomId(@PathVariable(value = "id") long roomId) {
+		List<Conference> conferences = new ArrayList<Conference>();
+		try {
+			conferences = conferenceService.getConferenceByRoomId(roomId);
+		} catch (RoomBookingException e) {
+			e.printStackTrace();
+		}
+		return conferences;
+	}
+
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Conference> getConferenceById(@PathVariable("id") long id) {
 		try {
@@ -45,7 +57,7 @@ public class ConferenceController {
 				return new ResponseEntity<Conference>(HttpStatus.NOT_FOUND);
 			}
 			return new ResponseEntity<Conference>(conference, HttpStatus.OK);
-		} catch (RestExceptionHandler e) {
+		} catch (RoomBookingException e) {
 			return new ResponseEntity(e.getStatus());
 		}
 	}
@@ -58,7 +70,7 @@ public class ConferenceController {
 			HttpHeaders headers = new HttpHeaders();
 			headers.setLocation(ucBuilder.path("/conference/{id}").buildAndExpand(conference.getId()).toUri());
 			return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-		} catch (RestExceptionHandler e) {
+		} catch (RoomBookingException e) {
 			return new ResponseEntity(e.getStatus());
 		}
 	}
@@ -73,7 +85,7 @@ public class ConferenceController {
 			}
 			conferenceService.update(currentConference, currentConference.getId());
 			return new ResponseEntity<String>(HttpStatus.OK);
-		} catch (RestExceptionHandler e) {
+		} catch (RoomBookingException e) {
 			return new ResponseEntity(e.getStatus());
 		}
 	}
@@ -87,7 +99,7 @@ public class ConferenceController {
 			}
 			conferenceService.deleteConferenceById(id);
 			return new ResponseEntity<Conference>(HttpStatus.NO_CONTENT);
-		} catch (RestExceptionHandler e) {
+		} catch (RoomBookingException e) {
 			return new ResponseEntity(e.getStatus());
 		}
 	}
@@ -102,7 +114,7 @@ public class ConferenceController {
 			}
 			conference = conferenceService.updatePartially(currentConference, id);
 			return new ResponseEntity<Conference>(conference, HttpStatus.OK);
-		} catch (RestExceptionHandler e) {
+		} catch (RoomBookingException e) {
 			return new ResponseEntity(e.getStatus());
 		}
 	}
