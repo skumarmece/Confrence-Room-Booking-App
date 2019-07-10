@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.websocket.server.PathParam;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -28,6 +30,10 @@ import room.management.service.ConferenceService;
 @RestController
 @RequestMapping(value = { "/api/v1/conference" })
 public class ConferenceController {
+	
+	Logger logger = LoggerFactory.getLogger(ConferenceController.class);
+	
+	
 	@Autowired
 	ConferenceService conferenceService;
 
@@ -43,7 +49,7 @@ public class ConferenceController {
 		try {
 			conferences = conferenceService.getConferenceByRoomId(roomId);
 		} catch (RoomBookingException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 		return conferences;
 	}
@@ -51,7 +57,7 @@ public class ConferenceController {
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Conference> getConferenceById(@PathVariable("id") long id) {
 		try {
-			System.out.println("Fetching Conference with id " + id);
+			logger.debug("Fetching Conference with id " + id);
 			Conference conference = conferenceService.findById(id);
 			if (conference == null) {
 				return new ResponseEntity<Conference>(HttpStatus.NOT_FOUND);
@@ -65,7 +71,7 @@ public class ConferenceController {
 	@PostMapping(value = "", headers = "Accept=application/json")
 	public ResponseEntity<Void> createConference(@RequestBody Conference conference, UriComponentsBuilder ucBuilder) {
 		try {
-			System.out.println("Creating Conference " + conference.getName());
+			logger.debug("Creating Conference " + conference.getName());
 			conferenceService.createConference(conference);
 			HttpHeaders headers = new HttpHeaders();
 			headers.setLocation(ucBuilder.path("/conference/{id}").buildAndExpand(conference.getId()).toUri());
@@ -77,7 +83,7 @@ public class ConferenceController {
 
 	@PutMapping(value = "/{id}", headers = "Accept=application/json")
 	public ResponseEntity<String> updateConference(@RequestBody Conference currentConference,
-			@PathParam(value = "id") long id) {
+			@PathVariable(value = "id") long id) {
 		try {
 			Conference conference = conferenceService.findById(currentConference.getId());
 			if (conference == null) {

@@ -91,7 +91,7 @@ public class ServiceUtils {
 	public void updateExistingConference(Conference existingConference, Conference conference) {
 		if (existingConference != null && conference != null) {
 			existingConference.setDescription(conference.getDescription());
-			existingConference.setUser(conference.getUser());
+			//existingConference.setUser(conference.getUser());
 			existingConference.setRoom(conference.getRoom());
 			existingConference.setName(conference.getName());
 			existingConference.setStartTime(conference.getStartTime());

@@ -1,6 +1,5 @@
 package room.management.service;
 
-import java.util.Date;
 import java.util.List;
 
 import room.management.bean.Conference;

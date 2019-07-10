@@ -31,8 +31,8 @@ public class ConferenceServiceImp implements ConferenceService {
 		if(conference != null) {
 			Room room = conference.getRoom();
 			if(room != null) {
-				Room existingRoom = serviceUtils.getRoomById(room.getId());
-				if(existingRoom != null) {
+				Room roomDBObj = serviceUtils.getRoomById(room.getId());
+				if(roomDBObj != null) {
 					if(!serviceUtils.hasConflict(room.getId(), conference, id)) {
 						resultData = saveConferenceObj(conference);		
 					} else {
@@ -42,7 +42,7 @@ public class ConferenceServiceImp implements ConferenceService {
 					serviceUtils.throwBadRequest("Invalid room details.");
 				}
 			} else {
-				serviceUtils.throwNotFound("Room detail found");
+				serviceUtils.throwNotFound("Room detail not found");
 			}
 		} else {
 			serviceUtils.throwBadRequest("Invalid input data");
